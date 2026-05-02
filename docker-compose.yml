@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: cloud-kitchen-users-db
+    environment:
+      POSTGRES_DB: cloud_kitchen_users
+      POSTGRES_USER: cloud_kitchen
+      POSTGRES_PASSWORD: cloud_kitchen_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - cloud-kitchen-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cloud_kitchen -d cloud_kitchen_users"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api-users:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-cloud-kitchen-users
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cloud_kitchen_users
+      SPRING_DATASOURCE_USERNAME: cloud_kitchen
+      SPRING_DATASOURCE_PASSWORD: cloud_kitchen_pass
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_SQL_INIT_MODE: always
+    ports:
+      - "8080:8080"
+    networks:
+      - cloud-kitchen-network
+
+volumes:
+  postgres_data:
+
+networks:
+  cloud-kitchen-network:
+    driver: bridge
