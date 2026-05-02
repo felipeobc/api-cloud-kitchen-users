@@ -240,7 +240,7 @@ curl http://localhost:8080/api/v1/users
 ## Listar com Paginação
 
 ```bash
-curl "http://localhost:8080/api/v1/users?page=0&size=10&sort=name,asc"
+curl "http://localhost:8080/api/v1/users?page=0&size=10"
 ```
 
 ---
