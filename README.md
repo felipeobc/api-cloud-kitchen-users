@@ -116,7 +116,7 @@ A aplicação sobe junto com o PostgreSQL.
 
 | Serviço    | URL                   |
 | ---------- | --------------------- |
-| API        | http://localhost:8080 |
+| API        | http://localhost:8080/swagger-ui/index.html#/ |
 | PostgreSQL | localhost:5432        |
 
 ---
