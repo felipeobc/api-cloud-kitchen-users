@@ -78,7 +78,7 @@ Antes de executar a aplicação, tenha instalado:
 ## 1️⃣ Clonar o Repositório
 
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/felipeobc/api-cloud-kitchen-users.git
 cd api-cloud-kitchen-users
 ```
 
@@ -116,7 +116,7 @@ A aplicação sobe junto com o PostgreSQL.
 
 | Serviço    | URL                   |
 | ---------- | --------------------- |
-| API        | http://localhost:8080 |
+| API        | http://localhost:8080/swagger-ui/index.html#/ |
 | PostgreSQL | localhost:5432        |
 
 ---
